@@ -1,4 +1,5 @@
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
+import BasicTable from './components/atoms/BasicTable';
 // import './App.css';
 
 const serviceList = ['Service 1', 'Service 2', 'Service 3'];
@@ -45,6 +46,8 @@ function App() {
             </Paper>
           ))}
         </Box>
+
+        <BasicTable></BasicTable>
       </Container>
     </>
   );
