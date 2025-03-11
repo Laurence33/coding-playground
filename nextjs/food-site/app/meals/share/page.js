@@ -1,6 +1,7 @@
 import ImagePicker from '@/app/components/atoms/image-picker/image-picker';
 import classes from './page.module.css';
 import { shareMeal } from '@/lib/actions';
+import BtnFormSubmit from '@/app/components/atoms/btn-form-submit';
 
 export default function ShareMealPage() {
   return (
@@ -42,7 +43,7 @@ export default function ShareMealPage() {
           </p>
           <ImagePicker name="image" label="Image" />
           <p className={classes.actions}>
-            <button type="submit">Share Meal</button>
+            <BtnFormSubmit text="Share Meal" />
           </p>
         </form>
       </main>
