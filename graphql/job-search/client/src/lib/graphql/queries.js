@@ -24,6 +24,14 @@ const apolloClient = new ApolloClient({
   link: concat(authLink, httpLink),
   cache: new InMemoryCache(),
   connectToDevTools: true,
+  /* defaultOptions: {
+    query: {
+      fetchPolicy: 'network-only'
+    },
+    watchQuery: {
+      fetchPolicy: 'network-only'
+    }
+  } */
 });
 
 export async function createJob({ title, description }) {
@@ -63,7 +71,10 @@ export async function getJobs() {
 
   const {
     data: { jobs },
-  } = await apolloClient.query({ query });
+  } = await apolloClient.query({
+    query,
+    fetchPolicy: "network-only"
+  });
   return jobs;
 }
 
