@@ -74,6 +74,16 @@ export const companyByIdQuery = gql`
     }
   `;
 
+
+export const jobsQuery = gql`
+    query {
+      jobs {
+        ...JobDetail
+      }
+    }
+    ${jobDetailFragment}
+  `;
+
 export async function createJob({ title, description }) {
   const mutation = gql`
     mutation CreateJob($input: CreateJobInput!) {
@@ -109,19 +119,10 @@ export async function createJob({ title, description }) {
 }
 
 export async function getJobs() {
-  const query = gql`
-    query {
-      jobs {
-        ...JobDetail
-      }
-    }
-    ${jobDetailFragment}
-  `;
-
   const {
     data: { jobs },
   } = await apolloClient.query({
-    query,
+    query: jobsQuery,
     fetchPolicy: "network-only"
   });
   return jobs;
