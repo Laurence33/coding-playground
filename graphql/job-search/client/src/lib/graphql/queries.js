@@ -118,28 +118,3 @@ export async function createJob({ title, description }) {
   return job;
 }
 
-export async function getJobs() {
-  const {
-    data: { jobs },
-  } = await apolloClient.query({
-    query: jobsQuery,
-    fetchPolicy: "network-only"
-  });
-  return jobs;
-}
-
-export async function getJob(id) {
-
-  const {
-    data: { job },
-  } = await apolloClient.query({ query: jobByIdQuery, variables: { id } });
-  return job;
-}
-
-export async function getCompany(id) {
-
-  const {
-    data: { company },
-  } = await apolloClient.query({ query: companyByIdQuery, variables: { id } });
-  return company;
-}
