@@ -1,6 +1,7 @@
 'use server'
 import { redirect } from "next/navigation";
 import { saveMeal } from "./meals";
+import { revalidatePath } from "next/cache";
 
 function isInvalidText(str) {
   if (!str || str.trim() === '') {
@@ -33,5 +34,6 @@ export async function shareMeal(prevState, formData) {
   }
   await saveMeal(meal);
   console.log('inserted meal');
+  revalidatePath('/meals');
   redirect('/meals');
 }
