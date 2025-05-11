@@ -1,12 +1,11 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
-import { BooksContext } from './context/BooksContext';
 import { getBooks } from './services/booksApi';
+import useBooksContext from './hooks/useBooksContext';
 
 export default function App() {
-  const { setBooks } = useContext(BooksContext);
+  const { setBooks } = useBooksContext();
 
   useEffect(() => {
     getBooks().then(data => setBooks(data));
