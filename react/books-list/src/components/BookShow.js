@@ -19,6 +19,9 @@ export default function BookShow({ book, onDelete, onUpdate }) {
     content = <BookEdit book={book} onUpdate={handleUpdate} />
   }
   return <div className="book-show">
+    <img alt="books"
+      src={`https://picsum.photos/seed/${book.id}/300/200`}
+    />
     {content}
     <div className="actions">
       <button className='edit' onClick={handleEditClick}>Edit</button>
