@@ -8,7 +8,10 @@ export default function App() {
     setBooks(prev => {
       return [
         ...prev,
-        { title }
+        {
+          id: Math.round(Math.random() * 999),
+          title
+        }
       ]
     })
   };
