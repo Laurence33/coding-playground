@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import BookEdit from './BookEdit';
+import { BooksContext } from '../context/BooksContext';
 
-export default function BookShow({ book, onDelete, onUpdate }) {
+export default function BookShow({ book, onDelete }) {
+  const { updateBookById } = useContext(BooksContext);
   const [showEdit, setShowEdit] = useState(false);
 
   const handleEditClick = () => {
@@ -9,7 +11,7 @@ export default function BookShow({ book, onDelete, onUpdate }) {
   }
 
   const handleUpdate = (id, title) => {
-    onUpdate(id, title);
+    updateBookById(id, title);
     setShowEdit(false);
   }
 

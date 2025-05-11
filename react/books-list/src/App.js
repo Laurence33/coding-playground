@@ -1,33 +1,20 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
+import { BooksContext } from './context/BooksContext';
+import { getBooks } from './services/booksApi';
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
-  const [books, setBooks] = useState([]);
+  const { books, setBooks } = useContext(BooksContext);
 
   useEffect(() => {
-    const getBooks = async () => {
-      const { data } = await axios.get(`${API_URL}/books`);
-      setBooks(data);
-    }
-    getBooks();
-  }, []);
+    getBooks().then(data => setBooks(data));
+  }, [setBooks]);
 
-  const updateBookById = async (id, newTitle) => {
-    const { data } = await axios.put(`${API_URL}/books/${id}`, {
-      title: newTitle
-    });
 
-    const updatedBooks = books.map(book => {
-      if (book.id === id) {
-        return data;
-      }
-      return book
-    })
-    setBooks(updatedBooks)
-  }
   const deleteBookById = async (id) => {
     await axios.delete(`${API_URL}/books/${id}`);
     const updatedBooks = books.filter((book) => {
@@ -48,7 +35,7 @@ export default function App() {
   };
   return <div className="app">
     <h1>Reading List</h1>
-    <BookList books={books} onUpdate={updateBookById} onDelete={deleteBookById} />
+    <BookList books={books} onDelete={deleteBookById} />
     <BookCreate onCreate={createBook} />
   </div>
 }
