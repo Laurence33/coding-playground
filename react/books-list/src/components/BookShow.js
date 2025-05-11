@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import BookEdit from './BookEdit';
 import { BooksContext } from '../context/BooksContext';
 
-export default function BookShow({ book, onDelete }) {
-  const { updateBookById } = useContext(BooksContext);
+export default function BookShow({ book }) {
+  const { updateBookById, deleteBookById } = useContext(BooksContext);
   const [showEdit, setShowEdit] = useState(false);
 
   const handleEditClick = () => {
@@ -27,7 +27,7 @@ export default function BookShow({ book, onDelete }) {
     {content}
     <div className="actions">
       <button className='edit' onClick={handleEditClick}>Edit</button>
-      <button className="delete" onClick={() => onDelete(book.id)}>x</button>
+      <button className="delete" onClick={() => deleteBookById(book.id)}>x</button>
     </div>
   </div>
 }

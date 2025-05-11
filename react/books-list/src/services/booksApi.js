@@ -18,3 +18,7 @@ export async function updateBook(id, title) {
   });
   return data;
 }
+
+export async function deleteBook(id) {
+  await axios.delete(`${API_URL}/books/${id}`);
+}

@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { postBook, updateBook } from '../services/booksApi';
+import { deleteBook, postBook, updateBook } from '../services/booksApi';
 
 export const BooksContext = createContext();
 
@@ -29,11 +29,20 @@ function Provider({ children }) {
     setBooks(updatedBooks)
   }
 
+  const deleteBookById = async (id) => {
+    await deleteBook(id);
+    const updatedBooks = books.filter((book) => {
+      return book.id !== id;
+    })
+    setBooks(updatedBooks);
+  }
+
   const contextValue = {
     books,
     setBooks,
     createBook,
-    updateBookById
+    updateBookById,
+    deleteBookById
   }
 
   return <BooksContext.Provider value={contextValue}>
