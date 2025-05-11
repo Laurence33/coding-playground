@@ -6,7 +6,7 @@ import { BooksContext } from './context/BooksContext';
 import { getBooks } from './services/booksApi';
 
 export default function App() {
-  const { books, setBooks } = useContext(BooksContext);
+  const { setBooks } = useContext(BooksContext);
 
   useEffect(() => {
     getBooks().then(data => setBooks(data));
@@ -14,7 +14,7 @@ export default function App() {
 
   return <div className="app">
     <h1>Reading List</h1>
-    <BookList books={books} />
+    <BookList />
     <BookCreate />
   </div>
 }
