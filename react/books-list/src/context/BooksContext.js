@@ -1,10 +1,21 @@
 import { createContext, useState } from 'react';
-import { updateBook } from '../services/booksApi';
+import { postBook, updateBook } from '../services/booksApi';
 
 export const BooksContext = createContext();
 
 function Provider({ children }) {
   const [books, setBooks] = useState([]);
+
+
+  const createBook = async (title) => {
+    const data = await postBook({ title });
+    setBooks(prev => {
+      return [
+        ...prev,
+        data
+      ]
+    })
+  };
 
   const updateBookById = async (id, newTitle) => {
     const data = await updateBook(id, newTitle);
@@ -21,6 +32,7 @@ function Provider({ children }) {
   const contextValue = {
     books,
     setBooks,
+    createBook,
     updateBookById
   }
 

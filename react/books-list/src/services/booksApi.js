@@ -7,6 +7,11 @@ export async function getBooks() {
   return data;
 }
 
+export async function postBook({ title }) {
+  const { data } = await axios.post(`${API_URL}/books`, { title });
+  return data;
+}
+
 export async function updateBook(id, title) {
   const { data } = await axios.put(`${API_URL}/books/${id}`, {
     title

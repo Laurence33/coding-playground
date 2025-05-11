@@ -23,19 +23,9 @@ export default function App() {
     setBooks(updatedBooks);
   }
 
-  const createBook = async (title) => {
-    const { data } = await axios.post(`${API_URL}/books`, { title });
-
-    setBooks(prev => {
-      return [
-        ...prev,
-        data
-      ]
-    })
-  };
   return <div className="app">
     <h1>Reading List</h1>
     <BookList books={books} onDelete={deleteBookById} />
-    <BookCreate onCreate={createBook} />
+    <BookCreate />
   </div>
 }
