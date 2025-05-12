@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
-import { getBooks } from './services/booksApi';
 import useBooksContext from './hooks/useBooksContext';
 
 export default function App() {
-  const { setBooks } = useBooksContext();
+  const { fetchBooks } = useBooksContext();
 
   useEffect(() => {
-    getBooks().then(data => setBooks(data));
-  }, [setBooks]);
+    fetchBooks()
+  }, [fetchBooks]);
 
   return <div className="app">
     <h1>Reading List</h1>
