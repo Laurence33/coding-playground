@@ -14,5 +14,6 @@ export default function App() {
   }
   return <div className="p-5">
     <Dropdown options={options} value={selection} onChange={handleChange} />
+    <Dropdown options={options} value={selection} onChange={handleChange} />
   </div>
 }
