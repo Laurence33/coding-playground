@@ -12,7 +12,7 @@ export default function App() {
   const handleChange = (value) => {
     setSelection(value);
   }
-  return <div>
+  return <div className="p-5">
     <Dropdown options={options} value={selection} onChange={handleChange} />
   </div>
 }
