@@ -1,7 +1,7 @@
-import TablePage from './pages/TablePage';
+import CounterPage from './pages/CounterPage';
 
 export default function App() {
   return <div>App
-    <TablePage />
+    <CounterPage initialCount={0} />
   </div>
 }
