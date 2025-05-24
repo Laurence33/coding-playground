@@ -17,11 +17,9 @@ export default function CarForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addCar(form))
-    dispatch(changeName(''))
-    dispatch(changeCost(''))
   }
 
-  return <div className="car-form-panel">
+  return <div className="car-form">
     <h4 className="subtitle is-3">Add Car</h4>
     <form onSubmit={handleSubmit}>
       <div className="field-group">
