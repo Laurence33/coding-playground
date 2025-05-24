@@ -21,8 +21,9 @@ export default function CarList() {
     dispatch(removeCar(car.id));
   }
   const renderedCars = cars.map(car => {
+    const isBold = name && car.name.toLowerCase().includes(name.toLowerCase());
     return (
-      <div key={car.id} className="panel">
+      <div key={car.id} className={`panel ${isBold && 'bold'}`}>
         <p>
           {car.name} - ${car.cost}
         </p>
