@@ -8,7 +8,7 @@ export default function CarSearch() {
   const handleSearchTermChange = (event) => {
     dispatch(changeSearchTerm(event.target.value));
   }
-  return <div className="list-header">
+  return <div className="list-header mb-5">
     <h3 className="title is-3">My Cars</h3>
     <div className="search field is-horizontal">
       <label className="label">Search</label>

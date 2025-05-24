@@ -19,7 +19,7 @@ export default function CarForm() {
     dispatch(addCar(form))
   }
 
-  return <div className="car-form">
+  return <div className="car-form mb-3">
     <h4 className="subtitle is-3">Add Car</h4>
     <form onSubmit={handleSubmit}>
       <div className="field-group">
