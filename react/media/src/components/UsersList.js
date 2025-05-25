@@ -1,25 +1,52 @@
-import { useEffect } from "react";
-import { fetchUsers } from "../store";
+import { useEffect, useState } from "react";
+import { addUser, fetchUsers } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "./Skeleton";
+import Button from "./Button";
 
 function UsersList() {
   const dispatch = useDispatch();
-  const { data, isLoading, error } = useSelector(state => state.users);
+  const { data } = useSelector(state => state.users);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [loadingUsersError, setLoadingUsersError] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    setIsLoadingUsers(true);
+    dispatch(fetchUsers())
+      .unwrap()
+      .catch((err) => setLoadingUsersError(err))
+      .finally(() => setIsLoadingUsers(false))
+
   }, [dispatch])
 
-  if (isLoading) {
+  const handleAddUser = () => dispatch(addUser())
+
+  if (isLoadingUsers) {
     return <Skeleton times={6} className="h-10 w-full" />;
   }
 
-  if (error) {
-    return <div>Error fetching data! {error.message}</div>
+  if (loadingUsersError) {
+    return <div>Error fetching data! {loadingUsersError.message}</div>
   }
 
-  return data.length;
+  const renderedUsers = data.map((user) => {
+    return <div key={user.id} className="mb-2 border rounded">
+      <div className="flex p-2 justify-between items-center cursor-pointer">
+        {user.name}
+      </div>
+    </div>
+  })
+  return <div className="p-5">
+    <div className="mb-3 flex flex-row justify-between m-3">
+      <h1 className="m-2 text-xl">Users</h1>
+      <Button
+        primary
+        className="cursor-pointer hover:bg-blue-400 rounded-sm"
+        onClick={handleAddUser}
+      >Add User</Button>
+    </div>
+    {renderedUsers}
+  </div>;
 }
 
 export default UsersList;
