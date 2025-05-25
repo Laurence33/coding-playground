@@ -4,7 +4,7 @@ import axios from 'axios';
 const fetchUsers = createAsyncThunk('users/fetch', async () => {
   const response = await axios.get('http://localhost:3005/users');
   // DEV ONLY!!
-  await sleep(1000);
+  await sleep(3000);
   return response.data;
 });
 
