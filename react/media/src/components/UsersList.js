@@ -4,6 +4,7 @@ import { addUser, fetchUsers } from "../store";
 import { useThunk } from "../hooks/use-thunk";
 import Skeleton from "./Skeleton";
 import Button from "./Button";
+import UserListItem from './UserListItem';
 
 function UsersList() {
   const { data } = useSelector(state => state.users);
@@ -18,7 +19,6 @@ function UsersList() {
     runCreateUser();
   }
 
-
   let content = null;
   if (isLoadingUsers) {
     content = <Skeleton times={6} className="h-10 w-full" />;
@@ -27,11 +27,7 @@ function UsersList() {
     content = <div>Error fetching data! {loadingUsersError.message}</div>
   } else {
     content = data.map((user) => {
-      return <div key={user.id} className="mb-2 border rounded">
-        <div className="flex p-2 justify-between items-center cursor-pointer">
-          {user.name}
-        </div>
-      </div>
+      return <UserListItem key={user.id} user={user} />
     })
   }
 
