@@ -9,6 +9,8 @@ function UsersList() {
   const { data } = useSelector(state => state.users);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [loadingUsersError, setLoadingUsersError] = useState(null);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [creatingUserError, setCreatingUserError] = useState(null);
 
   useEffect(() => {
     setIsLoadingUsers(true);
@@ -19,7 +21,13 @@ function UsersList() {
 
   }, [dispatch])
 
-  const handleAddUser = () => dispatch(addUser())
+  const handleAddUser = () => {
+    setIsCreatingUser(true);
+    dispatch(addUser())
+      .unwrap()
+      .catch(err => setCreatingUserError(err))
+      .finally(() => setIsCreatingUser(false));
+  }
 
   if (isLoadingUsers) {
     return <Skeleton times={6} className="h-10 w-full" />;
@@ -39,11 +47,16 @@ function UsersList() {
   return <div className="p-5">
     <div className="mb-3 flex flex-row justify-between m-3">
       <h1 className="m-2 text-xl">Users</h1>
-      <Button
-        primary
-        className="cursor-pointer hover:bg-blue-400 rounded-sm"
-        onClick={handleAddUser}
-      >Add User</Button>
+      {
+        isCreatingUser
+          ? 'Creating User...'
+          : <Button
+            primary
+            className="cursor-pointer hover:bg-blue-400 rounded-sm"
+            onClick={handleAddUser}
+          >Add User</Button>
+      }
+      {creatingUserError && 'Error creating user...'}
     </div>
     {renderedUsers}
   </div>;
