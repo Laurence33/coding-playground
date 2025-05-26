@@ -35,7 +35,8 @@ function UsersList() {
     <div className="mb-3 flex flex-row justify-between items-center m-3">
       <h1 className="m-2 text-xl">Users</h1>
       <Button
-        className="hover:bg-gray-100 rounded-md"
+        tertiary outline
+        className="rounded-md"
         loading={isCreatingUser}
         onClick={handleAddUser}
       >+ Add User</Button>
