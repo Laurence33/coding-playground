@@ -14,7 +14,7 @@ function UserListItem({ user }) {
   }
 
   const header = <Fragment>
-    <Button className="mr-3" loading={isLoading} onClick={() => handleRemoveUser(user)}>
+    <Button tertiary outline className="mr-3 rounded-md" loading={isLoading} onClick={() => handleRemoveUser(user)}>
       <GoTrashcan />
     </Button>
     {error && <div>Error deleting user.</div>}
